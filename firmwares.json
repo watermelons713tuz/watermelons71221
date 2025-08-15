@@ -46,11 +46,12 @@
   	  "slug": "root-modules-lsposed",
   	  "name": "Файлы для Root прав",
       "description": "Все файлы скачаны из офицальных репозитореев magisk 29.0 lsposed 1.9.2 и там модули которыея использую.",
-      "link": "files/firmware-v3.zip",
+      "link": "https://github.com/watermelons713tuz/watermelons71221/releases/download/watermelonses/root.7z",
       "size": "53,8 MB",
       "checksum": "SHA256: abc...123"
     }
   ]
 }
+
 
 
