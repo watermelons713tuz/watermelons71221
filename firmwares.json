@@ -1,0 +1,46 @@
+{
+  "firmwares": [
+    {
+      "slug": "fw-mi-9t",
+      "name": "Инженерная прошивка для Mi 9T или Redmi K20",
+      "description": "Тестовая инженерная версия для диагностики и востановления разделов. Внимание при загрузке будет написано Redmi это так и нужно.",
+      "link": "https://t.me/watermelons90",
+      "size": "0,97 GB после распаковки 3,51 GB",
+      "checksum": "SHA256: 1f9c...a2d"
+    }
+  ],
+  "dumps": [
+    {
+      "slug": "miunlockedfile",
+      "name": "Разблокировка блокировки Mi Account",
+      "description": "Убирает блокировку Mi Account (и вроде Google).",
+      "link": "files/Mi-Acccount.Bypass.in.sideload.mode.rar",
+      "size": "891 KB",
+      "checksum": "SHA256: c3ab...9f1"
+    },
+    {
+      "slug": "miflash",
+      "name": "Mi Flash",
+      "description": "Mi Flash с 4PDA с темы Mi 9T ОБЯЗАТЕЛЬНО ПРОЧИТАЙТЕ ФАЙЛ прочитай меня.txt если не хотите окирпичит телефон",
+      "link": "https://t.me/watermelons90",
+      "size": "98,3 MB",
+      "checksum": "SHA256: 77aa...2ce"
+    },
+	{
+      "slug": "superwallpaper",
+      "name": "Суперобои",
+      "description": "Несколько версий.",
+      "link": "https://t.me/watermelons90",
+      "size": "46,3 MB",
+      "checksum": "SHA256: abc...123"
+    },
+	{
+      "slug": "hyperceiler",
+      "name": "HyperCeiler",
+      "description": "Стабильный релиз.",
+      "link": "files/HyperCeiler.zip",
+      "size": "4,08 MB",
+      "checksum": "SHA256: abc...123"
+    }
+  ]
+}

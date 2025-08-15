@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Детали — прошивка/дамп</title>
+<style>
+  :root {
+    --primary:#6750A4; --primary-container:#EADDFF; --on-primary:#FFF;
+    --surface:#FFFBFE; --on-surface:#1C1B1F;
+    --surface-variant:#E7E0EC; --on-surface-variant:#49454F;
+    --radius:16px; --shadow:0 2px 6px rgba(0,0,0,.1);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --primary:#D0BCFF; --primary-container:#4F378B; --on-primary:#381E72;
+      --surface:#1C1B1F; --on-surface:#E6E1E5;
+      --surface-variant:#49454F; --on-surface-variant:#CAC4D0;
+      --shadow:0 2px 6px rgba(0,0,0,.4);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+       background:var(--surface);color:var(--on-surface)}
+  header{background:var(--primary);color:var(--on-primary);padding:16px;text-align:center;font-weight:700}
+  main{max-width:900px;margin:auto;padding:20px}
+  .card{background:var(--surface-variant);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  h1{margin:0 0 8px}
+  .meta{color:var(--on-surface-variant);margin:6px 0}
+  .row{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+  .btn{display:inline-block;padding:10px 14px;border-radius:var(--radius);text-decoration:none;background:var(--primary);color:var(--on-primary)}
+  .btn-outline{display:inline-block;padding:10px 14px;border-radius:var(--radius);text-decoration:none;border:1px solid var(--on-surface-variant);color:var(--on-surface)}
+  .crumbs{margin:10px 0 16px}
+</style>
+</head>
+<body>
+<header>Детали</header>
+<main>
+  <div class="crumbs">
+    <a class="btn-outline" href="index.html#firmwares">← К списку</a>
+  </div>
+  <div class="card" id="content">
+    Загрузка…
+  </div>
+</main>
+
+<script>
+function getParams(){
+  const p = new URLSearchParams(location.search);
+  return { type: p.get('type') || '', slug: p.get('slug') || '' };
+}
+
+function renderNotFound(){
+  document.getElementById('content').innerHTML = `
+    <h2>Ничего не найдено</h2>
+    <p class="meta">Проверьте корректность ссылки или вернитесь на главную страницу.</p>
+    <div class="row">
+      <a class="btn-outline" href="index.html">На главную</a>
+    </div>
+  `;
+}
+
+async function load(){
+  const { type, slug } = getParams();
+  if(!type || !slug) return renderNotFound();
+
+  const res = await fetch('firmwares.json');
+  const data = await res.json();
+
+  const list = data[type];
+  if(!Array.isArray(list)) return renderNotFound();
+
+  const item = list.find(x => x.slug === slug);
+  if(!item) return renderNotFound();
+
+  const whereBack = type === 'firmwares' ? '#firmwares' : '#dumps';
+
+  document.querySelector('.crumbs a').setAttribute('href', `index.html${whereBack}`);
+
+  document.title = `${item.name} — детали`;
+
+  document.getElementById('content').innerHTML = `
+    <h1>${item.name}</h1>
+    <p class="meta">${item.description || ''}</p>
+
+    <div class="row">
+      ${item.size ? `<div class="meta"><strong>Размер:</strong> ${item.size}</div>` : ''}
+      ${item.checksum ? `<div class="meta"><strong>Контрольная сумма:</strong> ${item.checksum}</div>` : ''}
+    </div>
+
+    <div class="row">
+      <a class="btn" href="${item.link}" download>Скачать</a>
+      <a class="btn-outline" href="index.html${whereBack}">К разделу</a>
+    </div>
+  `;
+}
+
+load().catch(err=>{
+  console.error(err);
+  renderNotFound();
+});
+</script>
+</body>
+</html>
