@@ -41,6 +41,15 @@
       "link": "files/HyperCeiler.zip",
       "size": "4,08 MB",
       "checksum": "SHA256: abc...123"
+    },
+	{
+  	  "slug": "fw-v3-0",
+  	  "name": "Прошивка v3.0",
+      "description": "Стабильный релиз.",
+      "link": "files/firmware-v3.zip",
+      "size": "820 MB",
+      "checksum": "SHA256: abc...123"
     }
   ]
 }
+
